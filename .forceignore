@@ -1,0 +1,17 @@
+# List files or directories below to ignore them when running force:source:push, force:source:pull, and force:source:status
+# More information: https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_exclude_source.htm
+#
+
+package.xml
+
+# LWC configuration files
+**/jsconfig.json
+**/.eslintrc.json
+
+# LWC Jest
+**/__tests__/**
+
+# Skill definitions and their bundled assets (e.g. agentforce-generate's sample .bundle files)
+# live under the package dir but are tooling, not org metadata — exclude so CLI type-inference
+# and deploy/validate never try to compile them.
+force-app/.claude/**

@@ -1,0 +1,69 @@
+<template>
+    <!--<template if:true={loading}>
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </template>
+
+    <template if:true={childRecId}>
+   <lightning-card title="Update Record">
+        <template if:true={fieldNames}>
+            <lightning-record-edit-form
+                object-api-name={objectApiName}
+                record-id={recordId}
+                onsuccess={handleSuccess}
+                onerror={handleError}>
+
+
+                <template for:each={fieldNames} for:item="field">
+                    <lightning-input-field
+                        key={field}
+                        field-name={field}>
+                    </lightning-input-field>
+                </template>
+
+                <div class="slds-m-top_medium">
+                    <lightning-button type="submit" label="Update" variant="brand"></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+         </template>
+   </lightning-card>
+    </template>
+    <template if:false={childRecId}>
+        <template for:each={fieldList} for:item="field">
+                <lightning-input
+                    key={field}
+                    name={field}
+                    label={field}
+                    onchange={handleChange}>
+                </lightning-input>
+            </template>
+            <lightning-button label="Save" onclick={handleSubmit}></lightning-button>
+        </template>-->
+
+
+
+  <!-- CREATE mode -->
+    <template if:false={recordId}>
+        <lightning-record-form
+            object-api-name="Extended_Opportunity__c"
+            layout-type="Full"
+            mode="edit"
+            onsubmit={handleSubmit}
+            onsuccess={handleSuccess}
+            columns="2">
+        
+        </lightning-record-form>
+</template>
+
+    <template if:true={recordId}>
+    <!-- UPDATE mode -->
+        <lightning-record-form
+            record-id={recordId}
+            object-api-name="Extended_Opportunity__c"
+            layout-type="Full"
+            mode="view"
+            columns="2"
+            onsuccess={handleSuccess}>
+        </lightning-record-form>
+    </template>
+
+</template>
