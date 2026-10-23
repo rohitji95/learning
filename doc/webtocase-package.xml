@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+
+    <!-- Case Assignment Rule: routes Web origin cases to Web_Queue -->
+    <types>
+        <members>Case</members>
+        <name>AssignmentRules</name>
+    </types>
+
+    <!-- Case List View: My Web Cases filtered by Web_Queue -->
+    <types>
+        <members>Case.My_Web_Cases</members>
+        <name>ListView</name>
+    </types>
+
+    <!-- Case Settings: Web-to-Case enabled, email notification config -->
+    <types>
+        <members>Case</members>
+        <name>Settings</name>
+    </types>
+
+    <!-- Case Origin standard value set: includes 'Web' origin value -->
+    <types>
+        <members>CaseOrigin</members>
+        <name>StandardValueSet</name>
+    </types>
+
+    <!-- Web-to-Case HTML test form (doc artifact) -->
+    <types>
+        <members>web-to-case-test</members>
+        <name>StaticResource</name>
+    </types>
+
+    <version>63.0</version>
+</Package>
