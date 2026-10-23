@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit a Support Case</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f9;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 40px 48px;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .logo svg { flex-shrink: 0; }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: #032D60;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #032D60;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    label .required {
+      color: #e53e3e;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #111827;
+      background: #fff;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #0176d3;
+      box-shadow: 0 0 0 3px rgba(1,118,211,0.12);
+    }
+
+    textarea { resize: vertical; min-height: 110px; }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #0176d3;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 8px;
+    }
+
+    .btn:hover { background: #014486; }
+    .btn:active { background: #012f60; }
+
+    .success-banner {
+      display: none;
+      background: #ecfdf5;
+      border: 1.5px solid #6ee7b7;
+      border-radius: 8px;
+      padding: 14px 18px;
+      color: #065f46;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: #9ca3af;
+      text-align: center;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Salesforce-style logo -->
+    <div class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="8" fill="#0176d3"/>
+        <path d="M16 7C12.13 7 9 10.13 9 14c0 1.45.44 2.8 1.18 3.92L8 24l6.33-1.62C15.17 22.77 16.07 23 17 23c3.87 0 7-3.13 7-7s-3.13-9-8-9z" fill="white"/>
+      </svg>
+      <span class="logo-text">Support Portal</span>
+    </div>
+
+    <h1>Contact Support</h1>
+    <p class="subtitle">Fill in the form below and we'll get back to you shortly.</p>
+
+    <div class="success-banner" id="successBanner">
+      &#10003; Your case was submitted successfully! Our team will reach out soon.
+    </div>
+
+    <!-- Web-to-Case form — posts directly to Salesforce -->
+    <form
+      id="wtcForm"
+      action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8"
+      method="POST"
+      target="sfHiddenFrame"
+    >
+      <!-- Hidden fields required by Salesforce -->
+      <input type="hidden" name="orgid" value="00D90000000mbU2EAI" />
+      <input type="hidden" name="retURL" value="https://www.salesforce.com" />
+      <input type="hidden" name="debug" value="0" />
+      <!-- Tells Salesforce to run the active Case assignment rule -->
+      <input type="hidden" name="assign" value="1" />
+
+      <div class="form-group">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name" maxlength="80" placeholder="Jane Smith" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <input type="email" id="email" name="email" maxlength="80" placeholder="jane@example.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject <span class="required">*</span></label>
+        <input type="text" id="subject" name="subject" maxlength="80" placeholder="Brief description of your issue" required />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" placeholder="Provide more details about your issue..."></textarea>
+      </div>
+
+      <button type="submit" class="btn" id="submitBtn">Submit Case</button>
+    </form>
+
+    <!-- Hidden iframe absorbs Salesforce's redirect so the page stays put -->
+    <iframe name="sfHiddenFrame" style="display:none"></iframe>
+
+    <p class="footer-note">Cases are routed to our support queue and reviewed during business hours.</p>
+  </div>
+
+  <script>
+    document.getElementById('wtcForm').addEventListener('submit', function (e) {
+      const name    = document.getElementById('name').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+
+      if (!name || !email || !subject) return; // let browser validation handle it
+
+      // Show success state after a brief delay (time for SF to receive the POST)
+      setTimeout(function () {
+        document.getElementById('wtcForm').style.display = 'none';
+        const banner = document.getElementById('successBanner');
+        banner.style.display = 'flex';
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
